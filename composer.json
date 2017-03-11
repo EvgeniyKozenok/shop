@@ -1,0 +1,22 @@
+{
+    "name": "john/store",
+    "description": "Application",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Evgeniy Kozenok",
+            "email": "kozenokevgeniy@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "john/frame": "dev-master",
+        "john/frame": "dev-dev"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:EvgeniyKozenok/frame.git"
+        }
+    ]
+}
