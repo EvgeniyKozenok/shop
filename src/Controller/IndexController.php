@@ -1,6 +1,6 @@
 <?php
 
-namespace Shop;
+namespace Shop\Controller;
 
 use john\frame\Response\RedirectResponse;
 

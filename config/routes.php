@@ -4,7 +4,7 @@ return [
     "root" => [
         "pattern" => "/",
         "method" => "",
-        "action" => "Shop\\IndexController@index"
+        "action" => "Shop\\Controller\\IndexController@index"
     ],
     "get_one_good" => [
         "pattern" => "/good/{id}",
@@ -12,7 +12,7 @@ return [
         "variables" => [
             "id" => "\\d+"
         ],
-        "action" => "Shop\\GoodController@getOneGood"
+        "action" => "Shop\\Controller\\GoodController@getOneGood"
     ],
     "get_one_good_param" => [
         "pattern" => "/good/{id}/params/{name}",
@@ -20,10 +20,10 @@ return [
         "variables" => [
             "id" => "\\d+"
         ],
-        "action" => "Shop\\GoodController@getOneGoodWithParam"
+        "action" => "Shop\\Controller\\GoodController@getOneGoodWithParam"
     ],
     "get_all_goods" => [
         "pattern" => "/good",
-        "action" => "Shop\\GoodController@getAllGoods"
+        "action" => "Shop\\Controller\\GoodController@getAllGoods"
     ]
 ];
