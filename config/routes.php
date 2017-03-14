@@ -1,12 +1,10 @@
 <?php
 
-namespace john\frame\config;
-
 return [
     "root" => [
         "pattern" => "/",
         "method" => "",
-        "action" => "IndexController@index"
+        "action" => "Shop\\IndexController@index"
     ],
     "get_one_good" => [
         "pattern" => "/good/{id}",
@@ -14,7 +12,7 @@ return [
         "variables" => [
             "id" => "\\d+"
         ],
-        "action" => "GoodController@getOneGood"
+        "action" => "Shop\\GoodController@getOneGood"
     ],
     "get_one_good_param" => [
         "pattern" => "/good/{id}/params/{name}",
@@ -22,10 +20,10 @@ return [
         "variables" => [
             "id" => "\\d+"
         ],
-        "action" => "GoodController@getOneGoodWithParam"
+        "action" => "Shop\\GoodController@getOneGoodWithParam"
     ],
     "get_all_goods" => [
         "pattern" => "/good",
-        "action" => "GoodController@getAllGoods"
+        "action" => "Shop\\GoodController@getAllGoods"
     ]
 ];
