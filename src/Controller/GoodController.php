@@ -2,40 +2,61 @@
 
 namespace Shop\Controller;
 
+use john\frame\Controller\BaseController;
+use john\frame\Response\Response;
+
 /**
  * Class GoodController
- * @package Shop
+ * @package john\frame\TestController
  */
-class GoodController
+class GoodController extends BaseController
 {
 
-    public function __construct()
-    {
-    }
-
     /**
-     * @param $id
-     */
-    public function getOneGood($id)
-    {
-        echo sprintf("You requested good by number %d", $id);
-    }
-
-    /**
-     * @param $id
-     * @param $name
-     */
-    public function getOneGoodWithParam($id, $name)
-    {
-        echo sprintf("You requested good by number %d with parameter %s", $id, $name);
-    }
-
-    /**
+     * Return response by some good
      *
+     * @param integer $id some good
+     * @return Response
      */
-    public function getAllGoods()
+    public function getOneGood($id): Response
     {
-        echo sprintf("You requested all goods!");
+        $this->render->render('index', [
+            'title' => "Good: $id",
+        ]);
+        $this->response->setContent($this->render->getRendered());
+        return $this->response;
+    }
+
+    /**
+     * Return response by some good with params
+     *
+     * @param integer $id some good
+     * @param string $name param of some good
+     * @return Response
+     */
+    public function getOneGoodWithParam($id, $name): Response
+    {
+        $this->render->render('index', [
+            'title' => "Good: $id",
+            'param' => $name
+        ]);
+        $this->response->setContent($this->render->getRendered());
+        return $this->response;
+    }
+
+    /**
+     * Return response by all goods
+     *
+     * @return Response
+     */
+    public function getAllGoods(): Response
+    {
+        $this->render->render('index', [
+            'title' => 'All Goods',
+            'currentDate' => date('d:m:Y H:i')
+        ]);
+        $this->response->addHeader('Cache-Control', ' no-cache, must-revalidate');
+        return $this->response;
     }
 
 }

@@ -2,19 +2,22 @@
 
 namespace Shop\Controller;
 
+use john\frame\Controller\BaseController;
 use john\frame\Response\RedirectResponse;
+use john\frame\Response\Response;
 
 /**
  * Class IndexController
- * @package Shop
+ * @package john\frame\TestController
  */
-class IndexController
+class IndexController extends BaseController
 {
     /**
      * Index action
      */
-    public function index(){
-        $response = new RedirectResponse('/good/1');
-        return $response;
+    public function index():Response
+    {
+        $this->response = new RedirectResponse('/good/1');
+        return $this->response;
     }
 }
