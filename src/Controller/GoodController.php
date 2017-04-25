@@ -2,12 +2,11 @@
 
 namespace Shop\Controller;
 
-use john\frame\Controller\BaseController;
-use john\frame\Response\Response;
+use John\Frame\Controller\BaseController;
+use John\Frame\Response\Response;
 
 /**
  * Class GoodController
- * @package john\frame\TestController
  */
 class GoodController extends BaseController
 {
@@ -20,10 +19,10 @@ class GoodController extends BaseController
      */
     public function getOneGood($id): Response
     {
-        $this->render->render('index', [
+        $this->renderer->rend('index', [
             'title' => "Good: $id",
         ]);
-        $this->response->setContent($this->render->getRendered());
+        $this->response->setContent($this->renderer->getRendered());
         return $this->response;
     }
 
@@ -36,11 +35,11 @@ class GoodController extends BaseController
      */
     public function getOneGoodWithParam($id, $name): Response
     {
-        $this->render->render('index', [
+        $this->renderer->rend('index', [
             'title' => "Good: $id",
             'param' => $name
         ]);
-        $this->response->setContent($this->render->getRendered());
+        $this->response->setContent($this->renderer->getRendered());
         return $this->response;
     }
 
@@ -51,7 +50,7 @@ class GoodController extends BaseController
      */
     public function getAllGoods(): Response
     {
-        $this->render->render('index', [
+        $this->renderer->rend('index', [
             'title' => 'All Goods',
             'currentDate' => date('d:m:Y H:i')
         ]);

@@ -2,13 +2,12 @@
 
 namespace Shop\Controller;
 
-use john\frame\Controller\BaseController;
-use john\frame\Response\RedirectResponse;
-use john\frame\Response\Response;
+use John\Frame\Controller\BaseController;
+use John\Frame\Response\RedirectResponse;
+use John\Frame\Response\Response;
 
 /**
  * Class IndexController
- * @package john\frame\TestController
  */
 class IndexController extends BaseController
 {
