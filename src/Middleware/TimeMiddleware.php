@@ -18,4 +18,5 @@ class TimeMiddleware implements MiddlewareI
     {
         return $next($request);
     }
+
 }

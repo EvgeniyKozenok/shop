@@ -22,7 +22,7 @@ return [
         ],
         "action" => "Shop\\Controller\\GoodController@getOneGoodWithParam",
         "middlewares" => [
-            "availability", "actionTime", "age", "actionTime", 'test'
+            "test", "actionTime", "age:admin,moderator"
         ],
     ],
     "get_all_goods" => [

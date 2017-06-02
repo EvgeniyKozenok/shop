@@ -7,6 +7,7 @@ use John\Frame\Response\Response;
 
 /**
  * Class GoodController
+ * @package Shop\Controller
  */
 class GoodController extends BaseController
 {
@@ -19,8 +20,9 @@ class GoodController extends BaseController
      */
     public function getOneGood($id): Response
     {
-        $this->renderer->rend('index', [
+        $this->renderer->rend('index', $this->injector, [
             'title' => "Good: $id",
+            'currentDate' => date('d:m:Y H:i:s')
         ]);
         $this->response->setContent($this->renderer->getRendered());
         return $this->response;
@@ -35,9 +37,10 @@ class GoodController extends BaseController
      */
     public function getOneGoodWithParam($id, $name): Response
     {
-        $this->renderer->rend('index', [
+        $this->renderer->rend('index', $this->injector, [
             'title' => "Good: $id",
-            'param' => $name
+            'param' => $name,
+            'currentDate' => date('d:m:Y H:i:s')
         ]);
         $this->response->setContent($this->renderer->getRendered());
         return $this->response;
@@ -50,9 +53,9 @@ class GoodController extends BaseController
      */
     public function getAllGoods(): Response
     {
-        $this->renderer->rend('index', [
+        $this->renderer->rend('index', $this->injector, [
             'title' => 'All Goods',
-            'currentDate' => date('d:m:Y H:i')
+            'currentDate' => date('d:m:Y H:i:s')
         ]);
         $this->response->addHeader('Cache-Control', ' no-cache, must-revalidate');
         return $this->response;

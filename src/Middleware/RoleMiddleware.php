@@ -18,9 +18,7 @@ class RoleMiddleware implements MiddlewareI
     public function handle(Request $request, \Closure $next, array ...$args): Response
     {
         $response = $next($request);
-        $response->code = 404;
-        $response->message = 'lalala';
         return $response;
-//        return $next($request);
     }
+
 }
