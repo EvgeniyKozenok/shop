@@ -8,6 +8,7 @@ use John\Frame\Response\Response;
 
 /**
  * Class IndexController
+ * @package Shop\Controller
  */
 class IndexController extends BaseController
 {

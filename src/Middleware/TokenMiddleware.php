@@ -2,13 +2,13 @@
 
 namespace Shop\Middleware;
 
+
 use John\Frame\Middleware\MiddlewareI;
 use John\Frame\Request\Request;
 use John\Frame\Response\Response;
 
 class TokenMiddleware implements MiddlewareI
 {
-
     /**
      * @param Request $request
      * @param \Closure $next
@@ -19,4 +19,5 @@ class TokenMiddleware implements MiddlewareI
     {
         return $next($request);
     }
+
 }
