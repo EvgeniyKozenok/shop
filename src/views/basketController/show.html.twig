@@ -1,0 +1,135 @@
+{% extends "default.html.twig" %}
+
+{% block content %}
+    <div class="span9">
+        <ul class="breadcrumb">
+            <li><a href="{{ route('root') }}"><i class="icon-white icon-home"></i></a> <span class="divider">/</span></li>
+            <li class="active">Корзина</li>
+        </ul>
+        <h3>  В Вашей корзине [ <small id="newCount">{{ productsCount }}</small><small> Продукта(ов) </small>]<a href="{{ route('root') }}" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Продолжить выбор товара </a></h3>
+        <hr class="soft"/>
+        {% if message %}
+            <div class="btn btn-info btn-large btn-block" style="cursor: default">{{ message|upper }}</div>
+        {% else %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Продукт</th>
+                    <th>Описание</th>
+                    <th>На складе</th>
+                    <th>Добавить/удалить</th>
+                    <th>Цена</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for goodType, products in goods %}
+                    {% for product in products %}
+                <tr id="remove-tr{{ goodType }}:{{ product.id }}" class="remove-tr">
+                    <td> <img width="60" src="/images/{{ product.photo }}.jpeg" alt="фото"/></td>
+                    <td>{{ product.name }}<br/>Бренд : {{ product.brand }}, Тип: {{ product.type }}</td>
+                    <td><h4 class="span1"  id="inShop{{ product.id }}">{{ product.sum }}</h4></td>
+                        {% for key, item in number %}
+                            {% if key == goodType %}
+                                {% for id, value in item %}
+                                    {% if id == product.id %}
+                                        <td>
+                                            <div class="input-append">
+                                                <input class="span1" style="max-width:34px" placeholder="{{ value }}" id="appendedInputButtons{{ key }}:{{ product.id }}" size="16" type="text">
+                                                    <button class="btn minus" type="button" data-article="{{ key }}:{{ product.id }}" data-price="{{ product.price }}">
+                                                <i class="icon-minus"></i>
+                                                </button>
+                                                <button class="btn plus" type="button" data-article="{{ key }}:{{ product.id }}" data-price="{{ product.price }}" data-sum="{{ product.sum }}">
+                                                    <i class="icon-plus "></i>
+                                                </button>
+                                                <button class="btn btn-danger remove " data-article="{{ key }}:{{ product.id }}" data-price="{{ product.price }}" type="button">
+                                                    <i class="icon-remove icon-white" ></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    <td>{{ product.price }}</td>
+                </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="table table-bordered">
+            <form class="form-horizontal" action="{{ route('order') }}" method="get">
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-large order">ЗАКАЗАТЬ</button>
+                    </div>
+                </div>
+            </form>
+        </table>
+        {% endif %}
+    </div>
+{% endblock %}
+{#{% endblock %}#}
+{#{% block content %}#}
+    {#<div class="span9">#}
+        {#<ul class="breadcrumb">#}
+            {#<li><a href="{{ route('root') }}"><i class="icon-white icon-home"></i></a> <span class="divider">/</span></li>#}
+            {#<li class="active">Корзина</li>#}
+        {#</ul>#}
+        {#<h3>  В Вашей корзине [ <small id="newCount">{{ productsCount }}</small><small> Продукта(ов) </small>]<a href="{{ route('root') }}" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Продолжить выбор товара </a></h3>#}
+        {#<hr class="soft"/>#}
+        {#{% if message %}#}
+            {#<div class="btn btn-info btn-large btn-block" style="cursor: default">{{ message|upper }}</div>#}
+        {#{% else %}#}
+        {#<table class="table table-bordered">#}
+            {#<thead>#}
+                {#<tr>#}
+                    {#<th>Продукт</th>#}
+                    {#<th>Описание</th>#}
+                    {#<th>На складе</th>#}
+                    {#<th>Добавить/удалить</th>#}
+                    {#<th>Цена</th>#}
+                {#</tr>#}
+            {#</thead>#}
+            {#<tbody>#}
+                {#{% for product in id %}#}
+                    {#{% for key, count in products %}#}
+                    {#{% if key == product.id %}#}
+                        {#{% if count > 0 %}#}
+                {#<tr id="remove-tr{{ product.id }}" class="remove-tr">#}
+                    {#<td> <img width="60" src="/images/{{ product.photo }}.jpeg" alt="фото"/></td>#}
+                    {#<td>{{ product.name }}<br/>Бренд : {{ product.brand }}, Память - ram:{{ product.ram }}/hdd:{{ product.hdd }}</td>#}
+                    {#<td>#}
+
+                        {#<div class="input-append">#}
+                            {#<input class="span1" style="max-width:34px" placeholder="{{ count }}" id="appendedInputButtons{{ product.id }}" size="16" type="text">#}
+                            {#<button class="btn minus" type="button" data-article="{{ product.id }}" data-price="{{ product.price }}">#}
+                                {#<i class="icon-minus"></i>#}
+                            {#</button>#}
+                            {#<button class="btn plus" type="button" data-article="{{ product.id }}" data-price="{{ product.price }}">#}
+                                {#<i class="icon-plus "></i>#}
+                            {#</button>#}
+                            {#<button class="btn btn-danger remove " data-article="{{ product.id }}" data-price="{{ product.price }}" type="button">#}
+                                {#<i class="icon-remove icon-white" ></i>#}
+                            {#</button>#}
+                        {#</div>#}
+                    {#</td>#}
+                    {#<td>{{ product.price }}</td>#}
+                {#</tr>#}
+                    {#{% endif %}#}
+                    {#{% endif %}#}
+                {#{% endfor %}#}
+                {#{% endfor %}#}
+            {#</tbody>#}
+        {#</table>#}
+        {#<table class="table table-bordered">#}
+            {#<form class="form-horizontal" action="{{ route('order') }}" method="get">#}
+                {#<div class="control-group">#}
+                    {#<div class="controls">#}
+                        {#<button type="submit" class="btn btn-large order">ЗАКАЗАТЬ</button>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</form>#}
+        {#</table>#}
+        {#{% endif %}#}
+    {#</div>#}
+{#{% endblock %}#}

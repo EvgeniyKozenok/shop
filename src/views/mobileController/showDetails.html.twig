@@ -1,0 +1,62 @@
+{% extends "default.html.twig" %}
+{% block content %}
+    <div class="span9">
+        <ul class="breadcrumb">
+            <li><a href="{{ route('root') }}"><i class="icon-white icon-home"></i></a> <span class="divider">/</span></li>
+            <li><a href="{{ route(back_route.name) }}">{{ back_route.title|upper }}</a> <span class="divider">/</span></li>
+            <li class="active">{{ good.название|capitalize }}</li>
+        </ul>
+        <div class="row">
+            <div id="gallery" class="span9">
+                <a href="/images/{{ good.photo }}.jpeg" title="{{  good.название }}">
+                    <img src="/images/{{ good.photo }}.jpeg" style="width:100%" alt="{{  good.название }}"/>
+                </a>
+                <h3>{{ back_route.description|upper }}: {{ good.название|upper }}</h3>
+                <small>{{ good.производитель }}({{ good.тип }})</small>
+                <hr class="soft"/>
+                <div class="form-horizontal qtyFrm">
+                    <div class="control-group">
+                        <label class="control-label"><span class="btn btn-info sumProduct" value="{{ good.sum }}" style="cursor: default">{{ good.цена }} &#8372;</span></label>
+                        <div class="controls">
+                            <button data-atr={{ product }}:{{ good.id }} price="{{ good.price }}" name="{{ good.id }}" value="{{ good.цена }}:{{ good.sum }}" class="btn btn-large btn-success pull-right add-to-basket"> В корзину <i class=" icon-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span9">
+                <ul id="productDetail" class="nav nav-tabs">
+                    <li><a href="#profile" data-toggle="tab">Отзывы {number}</a></li>
+                    <li class="active"><a href="#home" data-toggle="tab">Характеристики</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade active in" id="home">
+                        <table class="table table-bordered">
+                            <tbody>
+                                {% for key, value in good %}
+                                    {% if key == 'name' %}
+                                    {% elseif key == 'id' %}
+                                    {% elseif key == 'photo' %}
+                                    {% elseif key == 'sum' %}
+                                    {% else %}
+                                        {% if loop.index%2 == 0 %}
+                                            <tr class="techSpecRow alert alert-info"><td class="techSpecTD1">{{ key|capitalize }} </td><td class="techSpecTD2">{{ value|upper }}</td></tr>
+                                        {% else %}
+                                            <tr class="techSpecRow alert alert-success"><td class="techSpecTD1">{{ key|capitalize }}</td><td class="techSpecTD2">{{ value|upper }}</td></tr>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="profile">
+                        <h5>К этому товару еще нет отзывов. Вы можете быть первым!</h5>
+                        <hr class="soft"/>
+                        <h2>Добавить отзыв</h2>
+                        <span class="small">в разработке...</span>
+                    </div>
+                </div>
+                <br class="clr">
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "default.html.twig" %}
+
+{% block content %}
+
+    <div class="span9">
+        <ul class="breadcrumb">
+            <li><a href="{{ route('root') }}"><i class="icon-white icon-home"></i></a></li> /</span></li>
+            <li class="active">Регистрация</li>
+        </ul>
+        <h3> ПРОЙДИТЕ РЕГИСТРАЦИЮ</h3>
+        <div class="well">
+            <form class="form-horizontal" method="post" action="{{ route('registr') }}">
+
+                <h4>Ваши личные данные</h4>
+                <div class="control-group">
+                    <label class="control-label" for="fName">Имя <sup>*</sup></label>
+                    <div class="controls">
+                        <input type="text" name="fName" placeholder="First Name" value="{{ data.fName }}">
+                        {% if data.0.name %}
+                        <span class="btn-small btn-danger">{{ result.0.name }}
+                        </span>{% endif %}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="lName">Фамилия <sup>*</sup></label>
+                    <div class="controls">
+                        <input type="text" name="lName" placeholder="Last Name" value="{{ data.lName }}">
+                        {% if data.0.family %}
+                        <span class="btn-small btn-danger">{{ result.0.family }}</span>
+                        </span>{% endif %}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="email">Email <sup>*</sup></label>
+                    <div class="controls">
+                        <input type="text" name="email" placeholder="Email" value="{{ data.email }}">
+                        {% if data.0.email %}
+                        <span class="btn-small btn-danger">{{ result.0.email }}</span>
+                        {% endif %}
+                        {% if result.0 %}
+                            <span class="btn-small btn-danger">{{ result.0 }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="password">Пароль <sup>*</sup></label>
+                    <div class="controls">
+                        <input type="password" name="password" placeholder="Password" value="{{ data.password }}">
+                        {% if data.0.password %}
+                        <span class="btn-small btn-danger">{{ result.0.password }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="password1">Подтвердите пароль <sup>*</sup></label>
+                    <div class="controls">
+                        <input type="password" name="password1" placeholder="Password">
+                    {% if data.0.password1 %}
+                        <span class="btn-small btn-danger">{{ result.0.password1 }}</span>
+                    {% endif %}
+                    </div>
+                    {% if data.1 %}
+                    <span class="btn-small btn-danger">{{ result.1 }}{{ result.0 }}</span>
+                    {% endif %}
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Дата рождения <sup>*</sup></label>
+                    <div class="controls">
+                        <select class="span1" name="days">
+                            {% for i in 1..31 %}
+                            <option value="{{ i }}">{{ i }}&nbsp;&nbsp;</option>
+                            {% endfor %} }}
+                        </select>
+                        <select class="span1" name="month">
+                            {% for i in 1..12 %}
+                                <option value="{{ i }}">{{ i }}&nbsp;&nbsp;</option>
+                            {% endfor %} }}
+                        </select>
+                        <select class="span1" name="years">
+                            {% for i in 1960..2017 %}
+                                <option value="{{ i }}">{{ i }}&nbsp;&nbsp;</option>
+                            {% endfor %} }}
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="info">Дополнительная информация</label>
+                    <div class="controls">
+                        <textarea name="info" cols="26" rows="3"></textarea>
+                    </div>
+                </div>
+                <p><sup>*</sup>Обязательное поле</p>
+                <div class="control-group">
+                    <div class="controls">
+                        <input class="btn btn-large btn-success" type="submit" name="doSignUp" value="Зарегистрироваться" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
