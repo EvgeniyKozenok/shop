@@ -2,22 +2,23 @@
 
 namespace Shop\Controller;
 
-use John\Frame\Controller\BaseController;
-use John\Frame\Response\RedirectResponse;
 use John\Frame\Response\Response;
 
 /**
  * Class IndexController
- * @package Shop\Controller
+ * @package John\Frame\TestController
  */
-class IndexController extends BaseController
+class IndexController extends MainController
 {
     /**
      * Index action
+     * @return Response
+     * @internal param MainModel $model
      */
-    public function index():Response
+    public function index(): Response
     {
-        $this->response = new RedirectResponse('/good/1');
-        return $this->response;
+        $title = 'Интернет магазин электроники, компьютерной техники';
+        $data = compact('title');
+        return $this->getRenderer($data, null);
     }
 }

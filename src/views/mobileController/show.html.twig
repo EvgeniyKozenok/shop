@@ -1,0 +1,104 @@
+{% extends "default.html.twig" %}
+
+{% block sidebar %}
+    <hr/>
+    <form class="form-horizontal" method="POST" action="{{ route('filters', ['page', page ]) }}">
+        <legend>
+            <div class="alert alert-info" align="center">
+                <h4>ПАРАМЕТРЫ ФИЛЬТРА</h4>
+            </div>
+        </legend>
+        <div class="alert alert-default" align="center">
+            <h4 style="color:#000;">ЦЕНА</h4><br/>
+            <input id="min-price" name="price1/" value={{ price.price1 }} type="text" class="span1" style="height: 30px; text-align: center">
+            ...
+            <input id="max-price" name="price2/" value={{ price.price2 }} type="text" class="span1" style="height: 30px; text-align: center">
+            <br><small class="warning">{{ price.message|upper }}</small>
+        </div>
+        {% for filter in filters %}
+            <div class="alert alert-default" align="center">
+                <h4 class="text-uppercase" style="color:#000;">
+                    {{ filter.name|upper }}
+                </h4>
+                <br/>
+                {% for field in filter.parameters %}
+                    <div>
+                        <label class="checkbox">
+                            <input type="checkbox" name="{{ filter.field }}/{{ field.parameter }}">
+                            <p style="text-align:left; color:#000;">{{ field.parameter|capitalize }}</p>
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <div align="center">
+            <button type="submit" class="btn btn-success">ПРИМЕНИТЬ ФИЛЬТР</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block content %}
+
+    <div class="span9">
+        <ul class="breadcrumb">
+            <li><a href="{{ route('root') }}"><i class="icon-white icon-home"></i></a></li> /
+            <li class="active"> {{ additionalTitle|capitalize }}</li>
+        </ul>
+        <small>{{ title|upper }}</small>
+        <h3>
+            <small class="pull-right"> Всего найдено {{ goods.number }} наименований</small>
+        </h3>
+        <hr class="soft"/>
+
+        {% include 'sorter.html.twig' %}
+        {% include 'compare.html.twig' %}
+
+        <div class="tab-content">
+
+            <div class="tab-pane" id="listView">
+                {% for good in goods.products %}
+                <div class="row">
+                    <div class="span2">
+                        <img src="/images/{{  good.photo }}.jpeg"  width="100%" alt="Тут когда-то будет фото"/>
+                    </div>
+                    <div class="span4">
+                        <hr class="soft"/>
+                        <h5 class="name">{% filter upper %}{{ prefix }} {{ good.name }}{% endfilter %} </h5>
+                        <a class="btn btn-small pull-right" href="{{ route(good_route, ['id', good.id] ) }}">Подробнее</a>
+                        <br class="clr"/>
+                    </div>
+                    <div class="span3 alignR">
+                        <div class="form-horizontal qtyFrm">
+                            <h3><span class="btn btn-warning sumProduct" value="{{ good.sum }}" style="cursor: default">{{ good.sum }} шт.</span>
+                                <span class="btn btn-info price"  style="cursor: default">{{ good.price }} &#8372;</span></h3>
+                            <input class="btn btn-primary"  value="Сравнить" type="button" name="{{ good.name }}:{{ product }}/{{ good.id }}">
+                            <button  data-atr="{{ product }}:{{ good.id }}" price="{{ good.price }}" value="{{ product }}:{{ good.sum }}" class="btn btn-success add-to-basket"> В корзину <i class=" icon-shopping-cart"></i></button>
+                        </div>
+                    </div>
+                    <hr class="soft"/>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="tab-pane active" id="blockView">
+                <ul class="thumbnails">
+                    {% for good in goods.products %}
+                    <li class="span3">
+                        <div class="thumbnail">
+                            <a  href="{{ route(good_route, ['id', good.id] ) }}"><img src="/images/{{  good.photo }}.jpeg" alt="Тут когда-то будет фото #{{  good.photo }}"/></a>
+                            <div class="caption" align="center">
+                                <h5 class="name">{% filter upper %}{{ prefix }} {{ good.name }}{% endfilter %}</h5>
+                                <h4 style="text-align:center"><span class="btn btn-warning  sumProduct" value="{{ good.sum }}" style="cursor: default">{{ good.sum }} шт.</span>
+                                    <span class="btn btn-info price" style="cursor: default">{{ good.price }} &#8372;</span></h4>
+                                <input class="btn btn-primary"  value="Сравнить" type="button" name="{{ good.name }}:{{ product }}/{{ good.id }}">
+                                <button class="btn btn btn-success add-to-basket" data-atr="{{ product }}:{{ good.id }}" price="{{ good.price }}" value="{{ product }}:{{ good.sum }}">В корзину<i class="icon-shopping-cart"></i></button>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <hr class="soft"/>
+        </div>
+        <br class="clr"/>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "default.html.twig" %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block content %}
+    {% if message %}
+        <div class=" span9 btn-large btn-block btn-info text-success">
+        {{ message|upper }}
+        </div>
+        {% else %}
+            <div class="span9">
+                <ul class="breadcrumb">
+                    <li><a href="{{ route('root') }}"><i class="icon-white icon-home"></i></a></li>
+                </ul>
+                <small>ГЛАВНАЯ СТРАНИЦА (наполняется...)</small>
+            </div>
+    {% endif %}
+{% endblock %}
